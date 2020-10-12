@@ -1,0 +1,26 @@
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+  
+  .table-for-print {
+	  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	.table-for-print tbody td, .table-for-print thead th {
+	  border: 1px solid #ddd;
+	  padding: 8px;
+	}
+
+	.table-for-print tbody tr:nth-child(even){background-color: #cecece;}
+
+	.table-for-print thead th {
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  text-align: left;
+	  background-color: #dedede;
+	  color: #222;
+	}
+}

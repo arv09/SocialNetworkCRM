@@ -1,0 +1,60 @@
+body.align-right{
+	text-align: right;
+}
+
+.modal-dialog.modal-lg {
+    max-width: 1200px;
+}
+
+button.btn-sm {
+    margin-bottom: 2px;
+}
+
+.open .menutoggle i:before {
+	content: "\f101";
+}
+.error {
+	color: #dc3545!important;
+}
+
+.table-warranty-container{
+	overflow-y: auto;
+}
+
+body.align-right .btn-view-warranty-file.pull-right{
+	float: left !important;
+}
+
+/**General Dashboard **/
+.btn-modal{
+		cursor: pointer;
+	}
+.card-header, .dataTables_length{
+	text-align: left;
+}
+		
+/**Clients Dashboard **/
+.warranty-date{
+	margin-left: 10px;
+}
+.weather-category.twt-category {
+	margin: 0px;
+}
+.weather-category.twt-category ul{
+	margin-bottom: 0px;
+}
+
+/**Auto Complete**/
+.autocomplete-items{
+	position: absolute;
+    background: #fff;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    margin: 0px 20px;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    right: 0;
+	padding: 4px;
+}
