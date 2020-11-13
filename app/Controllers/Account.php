@@ -10,16 +10,15 @@ class Account extends BaseController{
 	{
 		$data = [];
 		helper(['form']);
-		
+
 		if(session()->get('isLoggedIn')){
-			return redirect()->to('/CRMplatform/public/dashboard');
+			return redirect()->to(base_url().'/dashboard');
 		}else{
-			if($this->request->getmethod() == 'post'){
+			if($this->request->getMethod() == 'post'){
 				
 				$rules =[
 					'email' => 'required|min_length[6]|max_length[50]',
 					'password' => 'required|min_length[6]|max_length[50]|validateUser[email,password]',
-					
 				];
 				
 				$errors = [
@@ -29,25 +28,66 @@ class Account extends BaseController{
 				];
 				
 				if(! $this->validate($rules, $errors)){
-						$data['validation'] = $this->validator;
+					$data['validation'] = $this->validator;
 				}else{
 					//store the account to our database
 					$model = new AccountModel();
 					$user = $model->where('email',$this->request->getVar('email'))->where('status',1)->first();
-					$user['translation'] = $this->request->getVar('translation');
+					// $user['translation'] = $this->request->getVar('translation');
 					
 					if($user != null){
 						$this->setUserSession($user);
-						return redirect()->to('/CRMplatform/public/dashboard');
+						return redirect()->to(base_url().'/dashboard');
 					}
 				}
-				
 			}
 			
 			echo view('templates/header', $data);
 			echo view('login');
 			echo view('templates/footer');
 		}
+	}
+
+	public function register()
+	{
+		$data = [];
+		helper(['form']);
+
+		if($this->request->getMethod() == 'post'){
+				
+			$rules =[
+				'firstname' => 'required|min_length[3]|max_length[100]',
+				'lastname' => 'required|min_length[3]|max_length[100]',
+				'email' => 'required|min_length[6]|max_length[50]',
+				'password' => 'required|min_length[6]|max_length[50]',
+				'password_confirm' => 'matches[password]',
+			];
+			
+			if(! $this->validate($rules)){
+				$data['validation'] = $this->validator;
+			}else{
+				//store the account to our database
+				$model = new AccountModel();
+				
+				$newData = [
+					'firstname' => $this->request->getVar('firstname'),
+					'lastname' => $this->request->getVar('lastname'),
+					'email' => $this->request->getVar('email'),
+					'password' => $this->request->getVar('password'),
+					'role' => 'user',
+					'status' => 1
+				];
+
+				$model->save($newData);
+				$session = session();
+				$session->setFlashData('success','Successful Registration');
+
+				return redirect()->to(base_url());
+			}
+		}
+		echo view('templates/header', $data);
+		echo view('register');
+		echo view('templates/footer');
 	}
 	
 	public function login()
@@ -56,16 +96,16 @@ class Account extends BaseController{
 		helper(['form']);
 	
 		if(session()->get('isLoggedIn') == true && session()->get('isForOTP') == true){
-			return redirect()->to('/CRMplatform/public/dashboard');
+			return redirect()->to(base_url().'/dashboard');
 		}else{
-			if($this->request->getmethod() == 'post'){
+			if($this->request->getMethod() == 'post'){
 				
 				$rules =[
 					'id_number' => 'required|min_length[4]|max_length[20]',
 				];
 				
 				if(! $this->validate($rules)){
-						$data['validation'] = $this->validator;
+					$data['validation'] = $this->validator;
 				}else{
 					//store the account to our database
 					$model = new AccountClientsModel();
@@ -168,13 +208,13 @@ class Account extends BaseController{
 	public function logout()
 	{
 		session()->destroy();
-		return redirect()->to('/CRMplatform/public/');
+		return redirect()->to(base_url());
 	}
 	
 	public function logout_client()
 	{
 		session()->destroy();
-		return redirect()->to('/CRMplatform/public/login');
+		return redirect()->to(base_url().'/login');
 	}
 	
 	private function setUserSession($user){
@@ -185,7 +225,7 @@ class Account extends BaseController{
 			'id_number' => $user['id_number'],
 			'email' => $user['email'],
 			'role' => $user['role'],
-			'translation' => $user['translation'],
+			// 'translation' => $user['translation'],
 			'isLoggedIn' => true,
 		];
 
@@ -230,7 +270,6 @@ class Account extends BaseController{
 		curl_close($curl);
 		return $response;
 	}
-	
 
 	//--------------------------------------------------------------------
 

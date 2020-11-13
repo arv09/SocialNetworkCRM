@@ -11,27 +11,37 @@
 						</div>
 						<div class="col-lg-5 p-20 background-white b-r-6">
 							<h3>Login to your Account</h3>
-								<form>
+							<?php if(session()->get('success')): ?>
+								<?= session()->get('success'); ?>
+							<?php endif; ?>
+							
+							<form class="" action="<?=base_url().'/account'?>" method="post">
 								<div class="form-group">
-								<label class="sr-only">Username or Email</label>
-								<input type="text" class="form-control" placeholder="Username or Email">
+									<label class="sr-only">Username or Email</label>
+									<input type="text" name="email" id="email" class="form-control" placeholder="Username or Email" value="<?= set_value('email') ?>">
 								</div>
 								<div class="form-group m-b-5">
-								<label class="sr-only">Password</label>
-								<input type="password" class="form-control" placeholder="Password">
+									<label class="sr-only">Password</label>
+									<input type="password" name="password" id="password" class="form-control" value="" placeholder="Password">
 								</div>
+								<?php if(isset($validation)): ?>
+								<div class="alert alert-danger errors" role="alert">
+									<?= $validation->listErrors() ?>
+								</div>
+								<?php endif; ?>
 								<div class="form-group form-inline text-left">
-								<div class="form-check">
-								<label>
-								<input type="checkbox"><small class="m-l-10"> Remember me</small>
-								</label>
-								</div>
+									<div class="form-check">
+										<label>
+											<input type="checkbox"><small class="m-l-10"> Remember me</small>
+										</label>
+									</div>
 								</div>
 								<div class="text-left form-group">
-								<button type="button" class="btn">Login</button>
+									<button type="submit" class="btn">Login</button>
 								</div>
-								</form>
-							<p class="small">Don't have an account yet? <a href="#">Register New Account</a>
+							</form>
+							
+							<p class="small">Don't have an account yet? <a href="<?=base_url().'/account/register'?>">Register New Account</a>
 							</p>
 						</div>
 					</div>
@@ -52,15 +62,6 @@
 			</div>
 			<div class="card-body">
 			
-				<?php if(session()->get('success')): ?>
-					<?= session()->get('success'); ?>
-				<?php endif; ?>
-				
-				<?php if(isset($validation)): ?>
-					<div class="alert alert-danger" role="alert">
-						<?= $validation->listErrors() ?>
-					</div>
-				<?php endif; ?>
 				<form class="" action="/CRMplatform/public/" method="post">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">

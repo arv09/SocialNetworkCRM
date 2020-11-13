@@ -7,11 +7,24 @@ class Home extends BaseController
 	
 	public function index()
 	{
-		$data['user'] = 'Winston';
+		$data = [];
+
+		if(session()->get('isLoggedIn'))
+		{
+			$useremail = session()->get('email');
+
+			$model = new AccountModel();
+			$data['user'] = $model->where('email',$useremail)->where('status',1)->first();
+
+			echo view('templates/header', $data);
+			echo view('dashboard');
+			echo view('templates/footer');
+		}
+		else
+		{
+			return redirect()->to(base_url());
+		}
 		
-		echo view('templates/header', $data);
-		echo view('dashboard');
-		echo view('templates/footer');
 	}
 	
 	public function page1()

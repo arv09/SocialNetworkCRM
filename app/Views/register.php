@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form class="" action="/framework4/public/register" method="post">
+				<form class="" action="<?=base_url().'/account/register'?>" method="post">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -46,16 +46,17 @@
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					Go back to <a href="/framework4/public/login">login</a>.
+					Go back to <a href="<?=base_url()?>">login</a>.
 				</div>
 			</div>
+			<div>
+				<?php if(isset($validation)): ?>
+					<div class="alert alert-danger" role="alert">
+						<?= $validation->listErrors() ?>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
-		<div>
-			<?php if(isset($validation)): ?>
-				<div class="alert alert-danger" role="alert">
-					<?= $validation->listErrors() ?>
-				</div>
-			<?php endif; ?>
-		</div>
+		
 	</div>
 </div>

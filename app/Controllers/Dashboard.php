@@ -14,12 +14,14 @@ class Dashboard extends BaseController
 {
 	public function index()
 	{
-		
 		$data=[];
 		$db = db_connect();
 		$cmodel = new CustomModel($db);
 		
 		if(session()->get('isLoggedIn')){
+			//temporary start
+			return redirect()->to(base_url().'/home');
+			// temporary end
 			$useremail = session()->get('email');
 			$data['user'] = $cmodel->getAccountDetails($useremail);
 			
@@ -62,7 +64,7 @@ class Dashboard extends BaseController
 				echo view('templates/footer2');
 			}
 		}else{
-			return redirect()->to('/CRMplatform/public/');
+			return redirect()->to(base_url());
 		}
 	}
 	
@@ -203,7 +205,7 @@ class Dashboard extends BaseController
 			   return $this->response->setJSON($datareponse);
 			}
 		}else{
-			return redirect()->to('/CRMplatform/public/');
+			return redirect()->to(base_url());
 		}
 	}
 	
