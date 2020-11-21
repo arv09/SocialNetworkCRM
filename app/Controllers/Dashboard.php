@@ -2,7 +2,7 @@
 
 use CodeIgniter\Controller;
 use App\Models\CustomModel;
-use App\Models\UserModel;
+use App\Models\UserDtlModel;
 use App\Models\AccountModel;
 use App\Models\AccountClientsModel;
 use App\Models\AccountDetailsModel;
@@ -17,10 +17,21 @@ class Dashboard extends BaseController
 		$data=[];
 		$db = db_connect();
 		$cmodel = new CustomModel($db);
+		$userModel = new UserDtlModel($db);
 		
 		if(session()->get('isLoggedIn')){
 			//temporary start
-			return redirect()->to(base_url().'/home');
+
+			if($user['access_rights'] === '1') {
+				return redirect()->to(base_url().'/superadmin_dashboard/main');
+			} else if($user['access_rights'] === '2') {
+				return redirect()->to(base_url().'/admin_dashboard/main/');
+			} else if($user['access_rights'] === '3') {
+				return redirect()->to(base_url().'/coordinator_dashboard/main/');
+			} else {
+				return redirect()->to(base_url().'/user_dashboard/main/');
+			}
+			
 			// temporary end
 			$useremail = session()->get('email');
 			$data['user'] = $cmodel->getAccountDetails($useremail);
