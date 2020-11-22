@@ -7,6 +7,8 @@ class UserDtlModel extends Model
 	protected $table = 'user_dtl';
 	protected $primaryKey = 'id';
 	protected $allowedFields = ['user_id','client_id','user_name','password','access_rights','status','is_deleted','updated_at'];
+	protected $beforeInsert = ['beforeInsert'];
+	protected $beforeUpdate = ['beforeUpdate'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';

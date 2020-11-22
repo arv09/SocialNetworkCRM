@@ -21,15 +21,17 @@ class Dashboard extends BaseController
 		
 		if(session()->get('isLoggedIn')){
 			//temporary start
+			$useremail = session()->get('email');
 
+			$user = $userModel->where('user_name',$useremail)->where('status',1)->first();
 			if($user['access_rights'] === '1') {
 				return redirect()->to(base_url().'/superadmin_dashboard/main');
 			} else if($user['access_rights'] === '2') {
-				return redirect()->to(base_url().'/admin_dashboard/main/');
+				return redirect()->to(base_url().'/admin_dashboard/main');
 			} else if($user['access_rights'] === '3') {
-				return redirect()->to(base_url().'/coordinator_dashboard/main/');
+				return redirect()->to(base_url().'/coordinator_dashboard/main');
 			} else {
-				return redirect()->to(base_url().'/user_dashboard/main/');
+				return redirect()->to(base_url().'/user_dashboard/main');
 			}
 			
 			// temporary end

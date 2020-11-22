@@ -169,7 +169,7 @@
 			</div> -->
 			<div class="col-md-12">
 				<div class="d-flex justify-content-center links">
-					Go back to &nbsp;<a href="<?=base_url().'/admin_dashboard/main/'.$userId?>">Dashboard</a>.
+					Go back to &nbsp;<a href="<?=base_url().'/admin_dashboard/main'?>">Dashboard</a>.
 				</div>
 			</div>
 			<div>

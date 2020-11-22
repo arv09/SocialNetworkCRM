@@ -93,7 +93,7 @@ class Admin_Dashboard extends BaseController
 				$logs->insert([
 					'action_taken' => 'INSERT',
 					'action_taken_by' => $loggedIn_user['user_name'],
-					'query_string' => (string)$clientDtl->getLastQuery(),
+					'query_string' => $clientDtl_save,
 					'table_name' => 'client_dtl'
 				]);
 				
@@ -109,11 +109,11 @@ class Admin_Dashboard extends BaseController
 				$logs->insert([
 					'action_taken' => 'INSERT',
 					'action_taken_by' => $loggedIn_user['user_name'],
-					'query_string' => (string)$userDtl->getLastQuery(),
+					'query_string' => $userDtl_save,
 					'table_name' => 'user_dtl'
 				]);
 
-				return redirect()->to(base_url('admin_dashboard/main/'.$userId));
+				return redirect()->to(base_url('admin_dashboard/main'));
 			}
 		}
 		
@@ -198,14 +198,13 @@ class Admin_Dashboard extends BaseController
 			];
 			$logs->insert($logs_data2);
 
-			return redirect()->to(base_url('admin_dashboard/main/'.$userId));
+			return redirect()->to(base_url('admin_dashboard/main'));
 		}
 
 		$data['userId'] = $userId;
 		$data['access_rights'] = $rights->findAll();
 		$data['user_dtls'] = $userDtl->getUserDetails($userId);
 
-		// var_dump($data['user_dtls']); die();
 		echo view('templates/header');
 		echo view('users/edit_user',$data);
 		echo view('templates/footer');
