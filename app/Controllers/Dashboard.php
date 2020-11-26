@@ -21,22 +21,22 @@ class Dashboard extends BaseController
 		
 		if(session()->get('isLoggedIn')){
 			//temporary start
-			$useremail = session()->get('email');
+			$username = session()->get('user_name');
 
-			$user = $userModel->where('user_name',$useremail)->where('status',1)->first();
+			$user = $userModel->where('user_name',$username)->where('status',1)->first();
 			if($user['access_rights'] === '1') {
-				return redirect()->to(base_url().'/superadmin_dashboard/main');
+				return redirect()->to(base_url().'/superadmin_dashboard');
 			} else if($user['access_rights'] === '2') {
-				return redirect()->to(base_url().'/admin_dashboard/main');
+				return redirect()->to(base_url().'/admin_dashboard');
 			} else if($user['access_rights'] === '3') {
-				return redirect()->to(base_url().'/coordinator_dashboard/main');
-			} else {
-				return redirect()->to(base_url().'/user_dashboard/main');
+				return redirect()->to(base_url().'/coordinator_dashboard');
+			} else if($user['access_rights'] === '4') {
+				return redirect()->to(base_url().'/user_dashboard');
 			}
 			
 			// temporary end
-			$useremail = session()->get('email');
-			$data['user'] = $cmodel->getAccountDetails($useremail);
+			$username = session()->get('user_name');
+			$data['user'] = $cmodel->getAccountDetails($username);
 			
 			if('admin' == session()->get('role')){
 				$data['allusers'] = $cmodel->getAllUsers();

@@ -11,10 +11,9 @@ class Home extends BaseController
 
 		if(session()->get('isLoggedIn'))
 		{
-			$useremail = session()->get('email');
-
-			$model = new AccountModel();
-			$data['user'] = $model->where('email',$useremail)->where('status',1)->first();
+			$username = session()->get('user_name');
+			$model = new UserDtlModel();
+			$data['user'] = $userDtl->where('user_name',$username)->where('status',1)->first();
 
 			echo view('templates/header', $data);
 			echo view('dashboard');
@@ -29,9 +28,13 @@ class Home extends BaseController
 	
 	public function page1()
 	{
-		echo view('templates/header');
+		echo view('templates/dashboard_header');
 		echo view('page1');
+		
 		echo view('templates/footer');
+		// echo view('templates/header');
+		// echo view('page1');
+		// echo view('templates/footer');
 	}
 	
 	public function page2()

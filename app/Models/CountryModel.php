@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-class UserLogsModel extends Model
+class CountryModel extends Model
 {
-	protected $table = 'user_logs';
+	protected $table = 'country';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['action_taken','action_taken_by','query_string','table_name','updated_at'];
+	protected $allowedFields = ['country_name','country_code','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';

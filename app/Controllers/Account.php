@@ -3,6 +3,7 @@
 use App\Models\AccountModel;
 use App\Models\AccountClientsModel;
 use App\Models\AccountDetailsModel;
+use App\Models\UserDtlModel;
 
 class Account extends BaseController{
 	
@@ -17,13 +18,13 @@ class Account extends BaseController{
 			if($this->request->getMethod() == 'post'){
 				
 				$rules =[
-					'email' => 'required|min_length[6]|max_length[50]',
+					'user_name' => 'required|min_length[5]|max_length[50]',
 					'password' => 'required|min_length[6]|max_length[50]|validateUser[email,password]',
 				];
 				
 				$errors = [
 					'password' => [
-						'validateUser' => 'Email or Password don\'t match.'
+						'validateUser' => 'Username or Password don\'t match.'
 					]
 				];
 				
@@ -31,10 +32,9 @@ class Account extends BaseController{
 					$data['validation'] = $this->validator;
 				}else{
 					//store the account to our database
-					$model = new AccountModel();
-					$user = $model->where('email',$this->request->getVar('email'))->where('status',1)->first();
+					$model = new UserDtlModel();
+					$user = $model->where('user_name',$this->request->getVar('user_name'))->where('status',1)->first();
 					// $user['translation'] = $this->request->getVar('translation');
-					
 					if($user != null){
 						$this->setUserSession($user);
 						return redirect()->to(base_url().'/dashboard');
@@ -220,12 +220,9 @@ class Account extends BaseController{
 	private function setUserSession($user){
 		$data = [
 			'id' => $user['id'],
-			'firstname' => $user['firstname'],
-			'lastname' => $user['lastname'],
-			'id_number' => $user['id_number'],
-			'email' => $user['email'],
-			'role' => $user['role'],
-			// 'translation' => $user['translation'],
+			'user_name' => $user['user_name'],
+			'access_rights' => $user['access_rights'],
+			'status' => $user['status'],
 			'isLoggedIn' => true,
 		];
 

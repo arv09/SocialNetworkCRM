@@ -39,9 +39,9 @@ class UserDtlModel extends Model
 	public function getAllUsers($accessRights) 
 	{
 		if ($accessRights == 1) {
-			$sql = "SELECT user_dtl.id as id, client_dtl.id as client_id, user_dtl.user_name, client_dtl.* FROM `user_dtl` LEFT JOIN client_dtl ON client_dtl.id = user_dtl.client_id WHERE user_dtl.status = 1 AND user_dtl.is_deleted = 0";
+			$sql = "SELECT user_dtl.id as user_id, client_dtl.id as client_id, user_dtl.user_name, client_dtl.* FROM `user_dtl` LEFT JOIN client_dtl ON client_dtl.id = user_dtl.client_id WHERE user_dtl.status = 1 AND user_dtl.is_deleted = 0";
 		} else if($accessRights == 2) {
-			$sql = "SELECT user_dtl.id as id, client_dtl.id as client_id, user_dtl.user_name, client_dtl.* FROM `user_dtl` LEFT JOIN client_dtl ON client_dtl.id = user_dtl.client_id WHERE user_dtl.access_rights != 3 and user_dtl.status = 1 AND user_dtl.is_deleted = 0";
+			$sql = "SELECT user_dtl.id as user_id, client_dtl.id as client_id, user_dtl.user_name, client_dtl.* FROM `user_dtl` LEFT JOIN client_dtl ON client_dtl.id = user_dtl.client_id WHERE user_dtl.access_rights != 3 and user_dtl.status = 1 AND user_dtl.is_deleted = 0";
 		}
 		
 		$users = $this->db->query($sql);
@@ -51,7 +51,7 @@ class UserDtlModel extends Model
 
 	public function getUserDetails($userId)
 	{
-		$sql = "SELECT user_dtl.id as id, client_dtl.id as client_id, user_dtl.*, client_dtl.* FROM `user_dtl` LEFT JOIN client_dtl ON client_dtl.id = user_dtl.client_id WHERE user_dtl.id = ? LIMIT 1";
+		$sql = "SELECT user_dtl.id as user_id, client_dtl.id as client_id, user_dtl.*, client_dtl.*, user_dtl.access_rights as access_rights FROM `user_dtl` LEFT JOIN client_dtl ON client_dtl.id = user_dtl.client_id WHERE user_dtl.id = ? LIMIT 1";
 
 		$users = $this->db->query($sql, $userId);
 		return $users->getResultArray();

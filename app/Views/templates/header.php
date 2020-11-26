@@ -13,6 +13,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/theme.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/style.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/latest-style.css">
 	</head>
 	<body>
-		<div class="container">

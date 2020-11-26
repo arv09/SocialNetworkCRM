@@ -1,11 +1,11 @@
 <?php namespace App\Validation;
-use App\Models\AccountModel;
+use App\Models\UserDtlModel;
 
 class UserRules{
 	
 	public function validateUser(string $str, string $fields, array $data){
-		$model = new AccountModel();
-		$user = $model->where('email',$data['email'])->where('status',1)->first();
+		$model = new UserDtlModel();
+		$user = $model->where('user_name',$data['user_name'])->where('status',1)->first();
 		if(!$user)
 			return false;
 		

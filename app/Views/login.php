@@ -17,8 +17,8 @@
 							
 							<form class="" action="<?=base_url().'/account'?>" method="post">
 								<div class="form-group">
-									<label class="sr-only">Username or Email</label>
-									<input type="text" name="email" id="email" class="form-control" placeholder="Username or Email" value="<?= set_value('email') ?>">
+									<label class="sr-only">Username</label>
+									<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Username" value="<?= set_value('user_name') ?>">
 								</div>
 								<div class="form-group m-b-5">
 									<label class="sr-only">Password</label>

@@ -115,7 +115,7 @@
 						<select name="access_right" class="form-control">
 							<option>Set Access Right</option>
 							<?php foreach($access_rights as $access): ?>
-							<option value="<?=$access['id']?>" <?=($user_dtls[0]['access_rights'] == $access['id']) ? 'selected' : ''?>><?=$access['label']?></option>
+							<option value="<?=$access['id']?>" <?=($user_dtls[0]['access_rights'] == $access['id']) ? 'selected="selected"' : ''?>><?=$access['label']?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -169,7 +169,7 @@
 			</div> -->
 			<div class="col-md-12">
 				<div class="d-flex justify-content-center links">
-					Go back to &nbsp;<a href="<?=base_url().'/admin_dashboard/main'?>">Dashboard</a>.
+					Go back to &nbsp;<a href="<?=base_url().'/admin_dashboard'?>">Dashboard</a>.
 				</div>
 			</div>
 			<div>
