@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class ClientBlogModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'client_blog';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['client_id','blog_link','category','title','summary','content','photo_path','published','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';

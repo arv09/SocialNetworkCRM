@@ -24,13 +24,13 @@ class Dashboard extends BaseController
 			$username = session()->get('user_name');
 
 			$user = $userModel->where('user_name',$username)->where('status',1)->first();
-			if($user['access_rights'] === '1') {
+			if($user['access_rights_id'] === '1') {
 				return redirect()->to(base_url().'/superadmin_dashboard');
-			} else if($user['access_rights'] === '2') {
+			} else if($user['access_rights_id'] === '2') {
 				return redirect()->to(base_url().'/admin_dashboard');
-			} else if($user['access_rights'] === '3') {
+			} else if($user['access_rights_id'] === '3') {
 				return redirect()->to(base_url().'/coordinator_dashboard');
-			} else if($user['access_rights'] === '4') {
+			} else if($user['access_rights_id'] === '4') {
 				return redirect()->to(base_url().'/user_dashboard');
 			}
 			

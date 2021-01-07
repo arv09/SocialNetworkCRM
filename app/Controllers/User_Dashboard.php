@@ -34,9 +34,5 @@ class User_Dashboard extends BaseController
 		}
 		
 	}
-	
-	public function user_list()
-	{
-		
-	}
+
 }

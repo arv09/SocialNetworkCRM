@@ -8,5 +8,8 @@
 	<script src="<?php echo base_url(); ?>/assets/js/jquery.js"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/plugin.js"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/functions.js"></script>
+	<script src="<?php echo base_url(); ?>/assets/js/userProfile_functions.js"></script>
+	<script src="<?php echo base_url(); ?>/assets/js/common_fields.js"></script>
+	<script src="<?php echo base_url(); ?>/assets/js/emailTemplate_functions.js"></script>
 	</body>
 </html>

@@ -2,16 +2,16 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class EmailTemplateTypeModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'email_template_type';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['template_type','status','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-
+	protected $updatedField  = 'updated_at';
+	
 	//--------------------------------------------------------------------
 
 }

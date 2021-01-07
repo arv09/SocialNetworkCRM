@@ -5,59 +5,67 @@
 			<small class="text-primary">Primary Website</small>
 			<div class="row team-members team-members-left team-members-shadow m-b-20">
 				<div class="col-lg-12">
-				<div class="team-member">
-				<div class="team-image" style="overflow">
-				<img class="link-featured" src="<?php echo base_url()."/images/26.jpg"; ?>">
-				</div>
-				<div class="team-desc">
-				<h3>Website Title</h3>
-				<span>Description of the website</span>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
-				<div class="align-center">
-				<a class="btn btn-xs btn-slide btn-light" href="#">
-				<i class="fab fa-facebook-f"></i>
-				<span>Facebook</span></a>
-				<a class="btn btn-xs btn-slide btn-light" href="#" data-width="100">
-				<i class="fab fa-twitter"></i>
-				<span>Twitter</span></a>
-				<a class="btn btn-xs btn-slide btn-light" href="#" data-width="118">
-				<i class="fab fa-instagram"></i>
-				<span>Instagram</span></a>
-				<a class="btn btn-xs btn-slide btn-light active" href="mailto:#" data-width="80">
-				<i class="fa fa-star"></i>
-				<span>Link</span></a>
-				</div>
-				</div>
-				</div>
+					<div class="team-member">
+						<div class="team-image" style="overflow">
+							<img class="link-featured" src="<?php echo base_url()."/images/26.jpg"; ?>">
+						</div>
+						<div class="team-desc">
+							<h3>Website Title</h3>
+							<span>Description of the website</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+							<div class="align-center">
+								<a class="btn btn-xs btn-slide btn-light" href="#">
+									<i class="fab fa-facebook-f"></i>
+									<span>Facebook</span>
+								</a>
+								<a class="btn btn-xs btn-slide btn-light" href="#" data-width="100">
+									<i class="fab fa-twitter"></i>
+									<span>Twitter</span>
+								</a>
+								<a class="btn btn-xs btn-slide btn-light" href="#" data-width="118">
+									<i class="fab fa-instagram"></i>
+									<span>Instagram</span>
+								</a>
+								<a class="btn btn-xs btn-slide btn-light active" href="mailto:#" data-width="80">
+									<i class="fa fa-star"></i>
+									<span>Link</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<small>Active Website</small>
 			<div class="row team-members team-members-left team-members-shadow m-b-20">
 				<div class="col-lg-12">
-				<div class="team-member">
-				<div class="team-image" style="overflow">
-				<img class="link-featured" src="<?php echo base_url()."/images/26.jpg"; ?>">
-				</div>
-				<div class="team-desc">
-				<h3>Website Title</h3>
-				<span>Description of the website</span>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
-				<div class="align-center">
-				<a class="btn btn-xs btn-slide btn-light" href="#">
-				<i class="fab fa-facebook-f"></i>
-				<span>Facebook</span></a>
-				<a class="btn btn-xs btn-slide btn-light" href="#" data-width="100">
-				<i class="fab fa-twitter"></i>
-				<span>Twitter</span></a>
-				<a class="btn btn-xs btn-slide btn-light" href="#" data-width="118">
-				<i class="fab fa-instagram"></i>
-				<span>Instagram</span></a>
-				<a class="btn btn-xs btn-slide btn-light active" href="mailto:#" data-width="80">
-				<i class="fa fa-star"></i>
-				<span>Link</span></a>
-				</div>
-				</div>
-				</div>
+					<div class="team-member">
+						<div class="team-image" style="overflow">
+							<img class="link-featured" src="<?php echo base_url()."/images/26.jpg"; ?>">
+						</div>
+						<div class="team-desc">
+							<h3>Website Title</h3>
+							<span>Description of the website</span>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+							<div class="align-center">
+								<a class="btn btn-xs btn-slide btn-light" href="#">
+									<i class="fab fa-facebook-f"></i>
+									<span>Facebook</span>
+								</a>
+								<a class="btn btn-xs btn-slide btn-light" href="#" data-width="100">
+									<i class="fab fa-twitter"></i>
+									<span>Twitter</span>
+								</a>
+								<a class="btn btn-xs btn-slide btn-light" href="#" data-width="118">
+									<i class="fab fa-instagram"></i>
+									<span>Instagram</span>
+								</a>
+								<a class="btn btn-xs btn-slide btn-light active" href="mailto:#" data-width="80">
+									<i class="fa fa-star"></i>
+									<span>Link</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -66,133 +74,115 @@
 			<h2>Trainings</h2>
 			<small>Guide 1</small>
 			<iframe src="https://www.youtube.com/embed/cNwEVYkx2Kk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			
 		</div>
-		
 	</div>
 </div>
 
 <div class="sidebar col-lg-3">
 	<div class="widget text-center">
-			<a href="#newLeads" data-lightbox="inline" class="btn btn-modal btn-shadow btn-rounded"><i class="fa fa-plus"></i> Add Contact</a>
+		<a href="#newLeads" data-lightbox="inline" class="btn btn-modal btn-shadow btn-rounded"><i class="fa fa-plus"></i> Add Contact</a>
 	</div>
 	
 	<div class="widget">
 		<div class="tabs">
 			<ul class="nav nav-tabs" id="tabs-posts" role="tablist">
-			<li class="nav-item">
-			<a class="nav-link active" id="home-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="true">Leads</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" id="profile-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Emails</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" id="contact-tab" data-toggle="tab" href="#recent" role="tab" aria-controls="recent" aria-selected="false">SMS</a>
-			</li>
+				<li class="nav-item">
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="true">Leads</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Emails</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#recent" role="tab" aria-controls="recent" aria-selected="false">SMS</a>
+				</li>
 			</ul>
 			
 			<div class="tab-content" id="tabs-posts-content">
 				<div class="tab-pane widget widget-notification fade show active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
-				
-						<h4 class="mb-0">Accounts</h4>
-						<p class="text-muted">active accounts</p>
-						
-						<?php if(!empty($leads)) { 
-						foreach($leads as $lead): ?>
-						<div class="notification-item notification-new">
-							<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"/></a></div>
-								<div class="notification-meta">
-									<a href="#"><?=$lead['full_name']?></a>
-								<span><?=ucwords($lead['customer_type'])?></span>
-							</div>
+					<h4 class="mb-0">Accounts</h4>
+					<p class="text-muted">active accounts</p>
+					<?php if(!empty($leads)) { 
+					foreach($leads as $lead): ?>
+					<div class="notification-item notification-new">
+						<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"/></a></div>
+							<div class="notification-meta">
+								<a href="#"><?=$lead['full_name']?></a>
+							<span><?=ucwords($lead['customer_type'])?></span>
 						</div>
-						<?php endforeach; ?>
-						<a href="#" class="text-theme">View all leads</a>
-						<?php } else { ?>
-							<p class="text-muted"> No leads yet. </p>
-						<?php } ?>
-						
-						<!-- <div class="notification-item notification-new">
-						<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/7.jpg"; ?>"></a></div>
-						<div class="notification-meta">
-						<a href="#">Joselito Medina</a>
-						<span>Coordinator: <i class="fas fa-medal"></i> 413pts</span>
-						</div>
-						</div>
-						
-						<div class="notification-item">
-						<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/8.jpg"; ?>"></a></div>
-						<div class="notification-meta">
-						<a href="#">Mai-Mai</a>
-							<span>Users: <i class="far fa-star"></i> 155pts</span>
-						</div>
-						</div> -->
-					
+					</div>
+					<?php endforeach; ?>
+					<a href="#" class="text-theme">View all leads</a>
+					<?php } else { ?>
+						<p class="text-muted"> No leads yet. </p>
+					<?php } ?>
 				</div>
 			
 				<div class="tab-pane widget widget-notification fade" id="featured" role="tabpanel" aria-labelledby="featured-tab">
 					<h4 class="mb-0">Email Campaigne</h4>
-					
 					<div class="notification-item notification-new">
-					<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"/></a></div>
-					<div class="notification-meta">
-					<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-					<small>Nov 19 2020</small>
+						<div class="notification-image"> 
+							<a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"/></a>
+						</div>
+						<div class="notification-meta">
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+							<small>Nov 19 2020</small>
+						</div>
 					</div>
-					</div>
-					
 					<div class="notification-item notification-new">
-					<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a></div>
-					<div class="notification-meta">
-					<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-					<small>Nov 18 2020</small>
+						<div class="notification-image"> 
+							<a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a>
+						</div>
+						<div class="notification-meta">
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+							<small>Nov 18 2020</small>
+						</div>
 					</div>
-					</div>
-					
 					<div class="notification-item">
-					<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a></div>
-					<div class="notification-meta">
-					<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-					<small>Nov 17 2020</small>
+						<div class="notification-image"> 
+							<a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a>
+						</div>
+						<div class="notification-meta">
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+							<small>Nov 17 2020</small>
+						</div>
 					</div>
-					</div>
-					
 					<a href="#" class="text-theme">View all emails</a>
 				</div>
 			
 				<div class="tab-pane widget widget-notification fade" id="recent" role="tabpanel" aria-labelledby="recent-tab">
 					<h4 class="mb-0">SMS Campaigne</h4>
-					
 					<div class="notification-item notification-new">
-					<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"/></a></div>
-					<div class="notification-meta">
-					<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-					<small>Nov 19 2020</small>
+						<div class="notification-image"> 
+							<a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"/></a>
+						</div>
+						<div class="notification-meta">
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+							<small>Nov 19 2020</small>
+						</div>
 					</div>
-					</div>
-					
 					<div class="notification-item">
-					<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a></div>
-					<div class="notification-meta">
-					<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-					<small>Nov 18 2020</small>
+						<div class="notification-image"> 
+							<a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a>
+						</div>
+						<div class="notification-meta">
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+							<small>Nov 18 2020</small>
+						</div>
 					</div>
-					</div>
-					
 					<div class="notification-item">
-					<div class="notification-image"> <a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a></div>
-					<div class="notification-meta">
-					<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
-					<small>Nov 17 2020</small>
+						<div class="notification-image"> 
+							<a href="#"><img src="<?php echo base_url()."/images/admin.png"; ?>"></a>
+						</div>
+						<div class="notification-meta">
+							<a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</a>
+							<small>Nov 17 2020</small>
+						</div>
 					</div>
-					</div>
-					
 					<a href="#" class="text-theme">View all SMS</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <!-- Create New Contact -->

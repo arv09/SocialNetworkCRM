@@ -14,6 +14,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/theme.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/latest-style.css">
+	<script type="text/javascript">
+		var baseURL = "<?php echo base_url(); ?>";
+	</script>
 	</head>
 	<body>
 	<section class="text-light" data-bg-parallax="<?php echo base_url()."/images/25.jpg"; ?>"><div class="parallax-container img-loaded" data-bg="<?php echo base_url()."/images/25.jpg"; ?>" data-velocity="-.140" data-ll-status="loaded"></div>
@@ -75,6 +78,8 @@
 					<li> <a title="" href="#">Email Option</a> </li>
 					<li> <a title="" href="#">Leads</a> </li>
 					<li> <a title="" href="<?=base_url().'/'.$dashboard_type.'/user_list/'.$user['id']?>">User List</a> </li>
+					<li> <a title="" href="<?=base_url().'/common_fields/email_template'?>">Email Template List</a> </li>
+					<li> <a title="" href="<?=base_url().'/common_fields'?>">Common Fields</a> </li>
 					</ul>
 				</div>
 

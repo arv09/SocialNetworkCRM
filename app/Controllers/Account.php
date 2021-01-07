@@ -221,7 +221,7 @@ class Account extends BaseController{
 		$data = [
 			'id' => $user['id'],
 			'user_name' => $user['user_name'],
-			'access_rights' => $user['access_rights'],
+			'access_rights_id' => $user['access_rights_id'],
 			'status' => $user['status'],
 			'isLoggedIn' => true,
 		];

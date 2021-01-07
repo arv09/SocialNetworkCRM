@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class EmailModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'email';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['client_id','fullname','email_address','contact_number','main_link','campaign_type','subject','msg_content','send_sms','send_voice_msg','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';

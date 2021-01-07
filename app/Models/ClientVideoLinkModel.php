@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class ClientVideoLinkModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'client_video_link';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['client_id','video_name','youtube_link','auto_play','landing_page_link','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';

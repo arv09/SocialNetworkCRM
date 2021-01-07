@@ -15,8 +15,8 @@ class Admin_Dashboard extends BaseController
 		$data = [];
 		$userDtl = new UserDtlModel();
 		$rights = new AccessRightsModel();
-		$country = new CountryModel();
 		$leads = new ClientLeadMineModel();
+		$country = new CountryModel();
 
 		helper(['form', 'url']);
 
@@ -28,10 +28,10 @@ class Admin_Dashboard extends BaseController
 			$username = session()->get('user_name');
 			$userLoggedIn = $userDtl->where('user_name',$username)->where('status',1)->first();
 			$data['user'] = $userLoggedIn;
-
 			$data['countries'] = $country->findAll();
-			$data['leads'] = $leads->where('client_id',$userLoggedIn['client_id'])->findAll();
 
+			$data['leads'] = $leads->where('client_id',$userLoggedIn['client_id'])->findAll();
+			
 			echo view('templates/dashboard_header', $data);
 			echo view('admin/dashboard', $data);
 			// echo view('users/dashboard', $data);
@@ -44,112 +44,196 @@ class Admin_Dashboard extends BaseController
 		
 	}
 	
-	public function user_list($useId)
+	public function user_list($userId)
 	{
 		$data = [];
 		$userDtl = new UserDtlModel();
 		$rights = new AccessRightsModel();
+		$country = new CountryModel();
 
-		$userLoggedIn = $userDtl->where('id',$userId)->where('status',1)->first();
-		$data['user'] = $userLoggedIn;
-		$data['userList'] = $userDtl->getAllUsers(2);
-		
-		$data['pageTitle'] = 'Admin';
-		
-		echo view('templates/dashboard_header', $data);
-		echo view('users/dashboard', $data);
-		echo view('templates/dashboard_footer');
+		$current_logged_access_right = session()->get('access_rights_id');
+		if(session()->get('isLoggedIn') && $current_logged_access_right == 2)
+		{
+			$userLoggedIn = $userDtl->where('id',$userId)->where('status',1)->first();
+			$data['user'] = $userLoggedIn;
+			$data['userList'] = $userDtl->getAllUsers(2);
+			
+			$data['pageTitle'] = 'Admin';
+			$data['dashboard_type'] = 'admin_dashboard';
+			$data['countries'] = $country->findAll();
+			
+			echo view('templates/dashboard_header', $data);
+			echo view('users/dashboard', $data);
+			echo view('templates/dashboard_footer');
+		}
+		else
+		{
+			return redirect()->to(base_url());
+		}
 	}
-    
-    public function add_user()
-    {
+
+	public function load_users()
+	{
+		$data = [];
+		$userDtl = new UserDtlModel();
+		$data = $userDtl->getAllUsers(2);
+
+		echo json_encode($data);
+	}
+
+	public function load_rights()
+	{
+		$data = [];
 		$rights = new AccessRightsModel();
+		$data = $rights->findAll();
+
+		echo json_encode($data);
+   }
+   
+   public function load_countries()
+   {
+      $data = [];
+		$countries = new CountryModel();
+		$data = $countries->findAll();
+
+		echo json_encode($data);
+   }
+
+   public function save_user()
+   {
 		$clientDtl = new ClientDtlModel();
 		$userDtl = new UserDtlModel();
 		$logs = new LogsModel();
+
+		helper(['form', 'url']);
+		$username = session()->get('user_name');
+		$userLoggedIn = $userDtl->where('user_name',$username)->where('status',1)->first();
 		
+		$clientDtl_data = [
+			'first_name' => $this->request->getPost('first_name'),
+			'mid_name'  => $this->request->getPost('mid_name'),
+			'last_name'  => $this->request->getPost('last_name'),
+			'birth_date'  => $this->request->getPost('birth_date'),
+			'gender'  => $this->request->getPost('gender'),
+			'phone_number'  => $this->request->getPost('phone_number'),
+			'mobile_number'  => $this->request->getPost('mobile_number'),
+			'email_address'  => $this->request->getPost('email_address'),
+			'home_address'  => $this->request->getPost('home_address'),
+			'city'  => $this->request->getPost('city'),
+			'zip_code'  => $this->request->getPost('zip_code'),
+			'state'  => $this->request->getPost('state'),
+			'country'  => $this->request->getPost('country'),
+			'alert'  => $this->request->getPost('alert')
+		];
+		
+		$photoFile = $this->request->getFile('upload_photo');
+		if ($photoFile->isValid() && !$photoFile->hasMoved()) 
+		{
+			$photoFile->move('./uploads/images');
+			$clientDtl_data += [
+				'photo_path' => ($photoFile) ? $photoFile->getName() : ''
+			];
+		}
+		$clientDtl_save = $clientDtl->insert($clientDtl_data);
+
+		// insert query in user_logs
+		$logs->save([
+			'action_taken' => 'INSERT',
+			'action_taken_by' => $loggedIn_user['user_name'],
+			'query_string' => (string)$clientDtl->getLastQuery(),
+			'table_name' => 'client_dtl'
+		]);
+		// insert user_dtl
+		$userDtl_data = [
+			'client_id' => $clientDtl_save,
+			'user_name' => $this->request->getPost('user_name'),
+			'password' => $this->request->getPost('password'),
+			'access_rights_id' => $this->request->getPost('access_right')
+		];
+		$userDtl_save = $userDtl->save($userDtl_data);
+		// insert query in user_logs
+		$logs->insert([
+			'action_taken' => 'INSERT',
+			'action_taken_by' => $loggedIn_user['user_name'],
+			'query_string' => (string)$userDtl->getLastQuery(),
+			'table_name' => 'user_dtl'
+		]);
+
+		// return $this->response->setJSON($response);
+		echo json_encode($response);
+	}
+
+	public function save_userProfile()
+	{
+		$clientDtl = new ClientDtlModel();
+		$userDtl = new UserDtlModel();
+		$logs = new LogsModel();
+
 		helper(['form', 'url']);
 
-		if($this->request->getMethod() == 'post'){
-			// for validation
-			$rules = [
-				'first_name' => 'required|min_length[3]|max_length[100]',
-				'last_name' => 'required|min_length[3]|max_length[100]',
-				'email_address' => 'required|min_length[6]|max_length[50]',
-				'password' => 'required|min_length[6]|max_length[50]',
-				'password_confirm' => 'matches[password]'
+		$username = session()->get('user_name');
+		$userLoggedIn = $userDtl->where('user_name',$username)->where('status',1)->first();
+		$clientDtl_data = [
+			'first_name' => $this->request->getPost('first_name'),
+			'mid_name'  => $this->request->getPost('mid_name'),
+			'last_name'  => $this->request->getPost('last_name'),
+			'birth_date'  => $this->request->getPost('birth_date'),
+			'gender'  => $this->request->getPost('gender'),
+			'phone_number'  => $this->request->getPost('phone_number'),
+			'mobile_number'  => $this->request->getPost('mobile_number'),
+			'email_address'  => $this->request->getPost('email_address'),
+			'home_address'  => $this->request->getPost('home_address'),
+			'city'  => $this->request->getPost('city'),
+			'zip_code'  => $this->request->getPost('zip_code'),
+			'state'  => $this->request->getPost('state'),
+			'country'  => $this->request->getPost('country'),
+			'alert'  => $this->request->getPost('alert')
+		];
+
+		$photoFile = $this->request->getFile('file');
+		if ($photoFile->isValid() && !$photoFile->hasMoved()) 
+		{
+			$photoFile->move('./uploads/images');
+			$clientDtl_data += [
+				'photo_path' => ($photoFile) ? $photoFile->getName() : ''
 			];
-
-			if(! $this->validate($rules))
-			{
-				$data['validation'] = $this->validator;
-			} 
-			else 
-			{
-				$username = session()->get('user_name');
-				$userLoggedIn = $userDtl->where('user_name',$username)->where('status',1)->first();
-				// insert client_dtl
-				$clientDtl_data = [
-					'first_name' => $this->request->getVar('first_name'),
-					'mid_name'  => $this->request->getVar('mid_name'),
-					'last_name'  => $this->request->getVar('last_name'),
-					'birth_date'  => $this->request->getVar('birth_date'),
-					'gender'  => $this->request->getVar('gender'),
-					'phone_number'  => $this->request->getVar('phone_number'),
-					'mobile_number'  => $this->request->getVar('mobile_number'),
-					'email_address'  => $this->request->getVar('email_address'),
-					'home_address'  => $this->request->getVar('home_address'),
-					'city'  => $this->request->getVar('city'),
-					'state'  => $this->request->getVar('state'),
-					'country'  => $this->request->getVar('country'),
-					'zip_code'  => $this->request->getVar('zip_code'),
-					'alert'  => $this->request->getVar('alert'),
-					'access_rights' => $this->request->getVar('access_right')
-				];
-
-				$photoFile = $this->request->getFile('upload_photo');
-				if ($photoFile->isValid() && !$photoFile->hasMoved()) 
-				{
-					$photoFile->move('./uploads/images');
-					$clientDtl_data += [
-						'photo_path' => ($photoFile) ? $photoFile->getName() : ''
-					];
-				}
-
-				// get client id
-				$clientDtl_save = $clientDtl->insert($clientDtl_data);
-				// insert query in user_logs
-				$logs->insert([
-					'action_taken' => 'INSERT',
-					'action_taken_by' => $loggedIn_user['user_name'],
-					'query_string' => (string)$clientDtl->getLastQuery(),
-					'table_name' => 'client_dtl'
-				]);
-				
-				// insert user_dtl
-				$userDtl_data = [
-					'client_id' => $clientDtl_save,
-					'user_name' => $this->request->getVar('user_name'),
-					'password' => $this->request->getVar('password'),
-					'access_rights' => $this->request->getVar('access_right')
-				];
-				$userDtl_save = $userDtl->insert($userDtl_data);
-				// insert query in user_logs
-				$logs->insert([
-					'action_taken' => 'INSERT',
-					'action_taken_by' => $loggedIn_user['user_name'],
-					'query_string' => (string)$userDtl->getLastQuery(),
-					'table_name' => 'user_dtl'
-				]);
-
-				return redirect()->to(base_url('admin_dashboard'));
-			}
 		}
+
+		$clientDtl_save = $clientDtl->insert($clientDtl_data);
+		// insert query in user_logs
+		$logs->insert([
+			'action_taken' => 'INSERT',
+			'action_taken_by' => $loggedIn_user['user_name'],
+			'query_string' => (string)$clientDtl->getLastQuery(),
+			'table_name' => 'client_dtl'
+		]);		
+
+		// insert user_dtl
+		$userDtl_data = [
+			'client_id' => $clientDtl_save,
+			'user_name' => $this->request->getPost('user_name'),
+			'password' => $this->request->getPost('password'),
+			'access_rights_id' => $this->request->getPost('access_right')
+		];
+		$userDtl_save = $userDtl->insert($userDtl_data);
+		// insert query in user_logs
+		$logs->insert([
+			'action_taken' => 'INSERT',
+			'action_taken_by' => $loggedIn_user['user_name'],
+			'query_string' => (string)$userDtl->getLastQuery(),
+			'table_name' => 'user_dtl'
+		]);
 		
-		$data['access_rights'] = $rights->findAll();
-		echo view('templates/header');
-		echo view('users/add_user',$data);
-		echo view('templates/footer');
+		echo json_encode(array('success'=>true));
+	}
+
+	public function get_userData($userId)
+	{
+		$userDtl = new UserDtlModel();
+
+		$data = $userDtl->getUserDetails($userId);
+
+		echo json_encode($data);
 	}
 	
 	public function edit_user($userId) 
@@ -184,7 +268,6 @@ class Admin_Dashboard extends BaseController
 			];
 
 			$photoFile = $this->request->getFile('upload_photo');
-			
 			if ($photoFile->isValid() && !$photoFile->hasMoved()) 
 			{
 				$photoFile->move('./uploads/images');
@@ -239,47 +322,40 @@ class Admin_Dashboard extends BaseController
 		echo view('templates/footer');
 	}
 
-	public function delete_user($userId) 
+	public function delete_user($loggedInUserId, $userId) 
 	{
-		$clientDtl = new ClientDtlModel();
 		$userDtl = new UserDtlModel();
+		$clientDtl = new ClientDtlModel();
 		$logs = new LogsModel();
 		
-		$username = session()->get('user_name');
-		$userLoggedIn = $userDtl->where('user_name',$username)->where('status',1)->first();
+		$userLoggedIn = $userDtl->where('id',$loggedInUserId)->where('status',1)->first();
+		$userDetail = $userDtl->where('id',$userId)->first();
+		
 		// update client_dtl
-
-		$is_deleted = [
+		$is_deleted = array(
 			'is_deleted' => 1
-		];
+		);
 
-		$clientDtl->update($userId, $is_deleted);
-
-		$logs_data2 = [
+		$clientDtl->update(array('id' => $userDetail['client_id']), $is_deleted);
+		$logs_data = [
 			'action_taken' => 'DELETE',
-			'action_taken_by' => $loggedIn_user['user_name'],
+			'action_taken_by' => $userLoggedIn['user_name'],
 			'query_string' => (string)$clientDtl->getLastQuery(),
 			'table_name' => 'client_dtl'
 		];
-		$logs->insert($logs_data2);
+		$logs->insert($logs_data);
 
-		$is_deleted += [
-			'status' => 0
-		];
-		$userDtl->update($userId, $is_deleted);
+		$user_delete = array('status' => 0);
+		$userDtl->update($userId, $user_delete);
 
 		$logs_data2 = [
 			'action_taken' => 'DELETE',
-			'action_taken_by' => $loggedIn_user['user_name'],
+			'action_taken_by' => $userLoggedIn['user_name'],
 			'query_string' => (string)$userDtl->getLastQuery(),
 			'table_name' => 'user_dtl'
 		];
 		$logs->insert($logs_data2);
-
-		return "<script>
-		alert('Successfully deleted user.');
-		window.location.href='".base_url('admin_dashboard')."';
-		</script>";
+		echo json_encode(array("status" => TRUE));
 	}
 
 	public function add_new_lead($clientId) 

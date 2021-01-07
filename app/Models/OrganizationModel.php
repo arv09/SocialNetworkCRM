@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class OrganizationModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'organization';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['org_id','org_name','status','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';

@@ -35,8 +35,13 @@ $routes->get('/login', 'Account::login');
 $routes->get('/logout', 'Account::logout');
 $routes->get('/otp', 'Account::otp');
 $routes->get('/dashboard', 'Dashboard::index');
-$routes->get('/dashboard/', 'Dashboard::index');
-//$routes->match(['get','post'],'/register', 'Account::register');
+$routes->get('/admin_dashboard/', 'Admin_Dashboard::index');
+$routes->get('/superadmin_dashboard/', 'SuperAdmin_Dashboard::index');
+$routes->get('/common_fields/', 'Common_Fields::index');
+// $routes->post('/add_user/', 'Admin_Dashboard::add_user');
+$routes->match(['get','post'],'/save_userProfile', 'Admin_Dashboard::save_userProfile');
+$routes->match(['get','post'],'/save_userProfile', 'SuperAdmin_Dashboard::save_userProfile');
+$routes->match(['get','post'],'/get_userData', 'Common_Fieldsv::get_userData');
 
 /**
  * --------------------------------------------------------------------

@@ -25,8 +25,7 @@
 						<td><?=$users['email_address']?></td>
 						<td><?=($users['status'] == 1) ? 'Active' : 'Inactive'?></td>
 						<td>
-							<a href="#userProfileForm" type="button" class=" btn-modal btn-update-profile" data-lightbox="inline" data-loggedUser="<?=$user['id']?>" data-userId="<?=$users['user_id']?>" id="updateUser" onclick="update_user(<?=$user['id'].','.$users['user_id']?>)"><i class='fas fa-user-edit'></i></a>
-
+							<a href="#userProfileForm" type="button" class=" btn-modal btn-update-profile" data-lightbox="inline" data-loggedUser="<?=$user['id']?>" data-userId="<?=$users['user_id']?>" id="updateUser"><i class='fas fa-user-edit'></i></a>
 							<a href="#modalDeleteUser" type="button" class=" btn-modal text-danger btn-delete-profile" data-lightbox="inline" id="deleteUser" data-loggedUser="<?=$user['id']?>" data-userId="<?=$users['user_id']?>" onclick="append_data(<?=$user['id'].','.$users['user_id']?>)"><i class='fas fa-user-minus'></i></a>
 						</td>
 					</tr>
@@ -40,7 +39,7 @@
 <div class="sidebar col-lg-3">
     <div class="col-lg-12 col-xs-12">
         <br>
-        <a href="#userProfileForm" id="createProfile" data-lightbox="inline" type="button" class="btn btn-icon-holder btn-shadow btn-outline btn-rounded btn-modal">Create New Profile <i class="far fa-user"></i></a>
+        <a href="#newProfile" id="createProfile" data-lightbox="inline" type="button" class="btn btn-icon-holder btn-shadow btn-outline btn-rounded btn-modal">Create New Profile <i class="far fa-user"></i></a>
         <br>
         <br>
     </div>
@@ -72,7 +71,7 @@
     </div>
 </div>
 
-<div id="userProfileForm" class="modal no-padding" data-delay="2000" style="max-width: 700px;" role="dialog">
+<div id="userProfileForm" class="modal no-padding fade" data-delay="2000" style="max-width: 700px;" role="dialog">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
@@ -80,7 +79,7 @@
 					<span class="h4 modal-title">Create User Profile</span>
 				</div>
 				<div class="card-body">
-					<form id="userForm" method="post" class="form-validate" enctype="multipart/form-data">
+					<form id="userForm" method="post" class="form-validate" novalidate="novalidate" enctype="multipart/form-data">
 					<div class="h5 mb-4">Contact Profile</div>
 						<div class="form-row">
 							<div class="form-group col-md-4">
@@ -137,7 +136,7 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="access_right">Access Right</label>
-								<select name="access_right" class="form-control" id="access_right">
+								<select name="access_right" class="form-control" id="access_right" class="form-control">
 								</select>
 							</div>
 						</div>
@@ -210,26 +209,12 @@
 	</div>
 </div>
 
-<!-- <div id="modalDeleteUser" class="modal fade modal-top background-danger">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="text-center">Please confirm deletion. <br>
-				<input type="hidden" name="logged_user" class="form-control" value="" />
-				<input type="hidden" name="user_id" class="form-control" value="" />
-				<button class="m-l-10 btn btn-light" id="confirmDelete">Confirm</button>
-			</div>
+<div id="modalDeleteUser" class="modal-strip modal-top background-danger">
+	<div class="container">
+		<div class="text-center">Please confirm deletion. <br>
+			<input type="hidden" name="logged_user" class="form-control" value="" />
+			<input type="hidden" name="user_id" class="form-control" value="" />
+			<button class="m-l-10 btn btn-light" id="confirmDelete">Confirm</button>
 		</div>
 	</div>
-</div> -->
-
-<div class="modal fade" id="modalDeleteUser" tabindex="-1" role="dialog" aria-labelledby="modalDeleteUserLabel" aria-hidden="true">
-  	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
-	 		<div class="text-center modal-label">Please confirm deletion. <br>
-				<input type="hidden" name="logged_user" class="form-control" value="" />
-				<input type="hidden" name="user_id" class="form-control" value="" />
-				<button class="m-l-10 btn btn-light" id="confirmDelete">Confirm</button>
-			</div>
-    	</div>
-  	</div>
 </div>

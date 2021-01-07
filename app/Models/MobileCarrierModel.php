@@ -2,15 +2,15 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class MobileCarrierModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'mobile_carrier';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['mobile_carrier_name','country','status','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+   protected $updatedField  = 'updated_at';
 
 	//--------------------------------------------------------------------
 

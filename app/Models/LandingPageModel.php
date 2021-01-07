@@ -2,11 +2,11 @@
 
 use CodeIgniter\Model;
 
-class AccessRightsModel extends Model
+class LandingPageModel extends Model
 {
-	protected $table = 'access_level';
+	protected $table = 'landing_page';
 	protected $primaryKey = 'id';
-	protected $allowedFields = ['access_rights_id','access_name','updated_at'];
+	protected $allowedFields = ['client_id','landing_page_link','tour_page','msg_campaign','custom_direct_page','status','paid','updated_at'];
 	
 	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
